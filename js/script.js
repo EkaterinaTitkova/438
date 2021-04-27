@@ -1,77 +1,185 @@
+//**** Мини-калькулятор ****
+// сложение 2-х чисел
+// разность 2-х чисел
+// произведение 2-х чисел
+// частное 2-х чисел
+// возведение числна в n-степень
+// корень n-ой степени
+
+let cancel = true;
+let menu = ` Ваш выбор (0-6)
+1. Сложение 2-х чисел
+2. Разность 2-х чисел
+3. Произведение 2-х чисел
+4. Деление 2-х чисел
+5. Возведение числна в n-степень
+6. Вычисление корня n-ой степени
+0. Отмена`;
+
+let num1, num2;
+let result; //сумма, разность, произведение...
+
+do {
+  let operation = prompt(menu, "0");
+  
+  switch(operation) {
+    case "1": let num1 = +prompt("первое число:");
+              let num2 = +prompt("второе число:");
+
+              result = num1 + num2;
+              alert(`Сумма чисел = ${result}`);
+              break;
+    case "2": let num1 = prompt("первое число:");
+              let num2 = prompt("второе число:");
+
+              result = num1 - num2;
+              alert(`Разность чисел = ${result}`);
+              break;
+    case "3": let num1 = prompt("первое число:");
+              let num2 = prompt("второе число:");
+
+              result = num1 * num2;
+              alert(`произведение чисел = ${result}`);
+              break;
+    case "4": num1 = prompt("первое число:");
+              num2 = prompt("второе число:");
+
+              if(num2 != 0) {
+                result = num1 / num2;
+                alert(`частное 2-х чисел = ${result.toFixed(4)}`);
+              }
+              else {
+                alert(`Делить на 0 нельзя!`);
+              }
+              break;
+    case "5": num1 = prompt("Число:");
+              num2 = prompt("Степень:");
+
+              if(num2 < 0) {
+                result = Math.pow(num1, num2).toFixed(2);
+              }
+              else {             
+              // result = num1**num2;
+              result = Math.pow(num1, num2);
+              }
+
+              alert(`Число ${num1} в степени ${num2} = ${result}`);
+            
+              break;
+    case "6": num1 = prompt("Число:");
+              num2 = prompt("Степень корня:");
+
+              result = Math.pow(num1, 1 / num2);
+              alert(`корень степени ${num2} из числа ${num1} = ${result}`);
+
+              break;
+  
+    //отмена действия 
+    case "0":
+    case null: cancel = false;
+                break;
+    default: alert("Ошибка! Неверный выбор!!!");
+                break;
+  }
+} while(cancel);
+
+
+// **** Задача 5 ****
+// Выведите столбец чисел от 1 до 50.
+
+// let i = 1;
+
+// // цикл с предисловием
+// while(i <= 50) {
+//   console.log(i + `\n`);
+//   i++;
+// }
+
+// // цикл с постусловием
+// do {
+//   console.log(i + `\n`);
+//   i++;
+// } while(i < 50)
+
+
+//break
+//continue
+
+
 //**** Задача 3 ****
 //Пользователь вводит сумму вклада и процент, который будет начисляться ежегодно.
 //Отобразить размер вклада поочередно на ближайшие 5 лет.
 
-let sum; //сумма вклада
-let percent; //годовой процент
-let countYears; //кол-во лет
-let result; //итоговая строка с выводом
+// let sum; //сумма вклада
+// let percent; //годовой процент
+// let countYears; //кол-во лет
+// let result; //итоговая строка с выводом
 
-let endWordYears = ""; //строка содержащая "год(а)", "лет"
+// let endWordYears = ""; //строка содержащая "год(а)", "лет"
 
-//Допустим пользователь вбивает 1000 под 10% на 10 лет
+// //Допустим пользователь вбивает 1000 под 10% на 10 лет
 
-sum = Number(prompt("Сумма вклада:"));
-percent = Number(prompt("Годовой %:"));
-countYears = Number(prompt("период вклада (лет):"));
+// sum = Number(prompt("Сумма вклада:"));
+// percent = Number(prompt("Годовой %:"));
+// countYears = Number(prompt("период вклада (лет):"));
 
-//for(объявление и инициализация переменных цикла; условие; изменение счётчика) {
-//тело цикла
-//}
+// //for(объявление и инициализация переменных цикла; условие; изменение счётчика) {
+// //тело цикла
+// //}
 
-for (let i = 1; i <= countYears; i++) {
-  sum += sum * percent / 100;
+// for (let i = 1; i <= countYears; i++) {
+//   sum += sum * percent / 100;
 
-  if (i != 11 && i % 10 == 1) {
-    endWordYears = "год";
-  } 
-  // else if ((i % 10 >= 2 && i % 10 <= 4) && ((i != 11) && (i != 12) && (i != 13) && (i != 14))) {
-  //   endWordYears = "года";
-  // } 
-  else if((i >= 5 && i <= 20) || (i %10 >= 5 && i % 10 <= 9) || (i % 10) == 0) {
-    endWordYears = "лет";
-  }
-  else {
-    endWordYears = "года";
-  }
+//   if (i != 11 && i % 10 == 1) {
+//     endWordYears = "год";
+//   } 
+//   // else if ((i % 10 >= 2 && i % 10 <= 4) && ((i != 11) && (i != 12) && (i != 13) && (i != 14))) {
+//   //   endWordYears = "года";
+//   // } 
+//   else if((i >= 5 && i <= 20) || (i %10 >= 5 && i % 10 <= 9) || (i % 10) == 0) {
+//     endWordYears = "лет";
+//   }
+//   else {
+//     endWordYears = "года";
+//   }
 
-  result += `Через ${i} ${endWordYears} сумма = ${sum.toFixed(2)}\n`
-  console.log(`Через ${i} ${endWordYears} сумма = ${sum.toFixed(2)}`);
-}
+//   result += `Через ${i} ${endWordYears} сумма = ${sum.toFixed(2)}\n`
+//   console.log(`Через ${i} ${endWordYears} сумма = ${sum.toFixed(2)}`);
+// }
 
-alert(result);
+// alert(result);
 
-//если
-if (условие) {
-  //команды
-}
-//иначе, если
-else if (условие) {
-  //команды
-}
-//иначе, если
-else if (условие) {
-  //команды
-}
-//иначе
-else {
-  //команды
-}
+// //если
+// if (условие) {
+//   //команды
+// }
+// //иначе, если
+// else if (условие) {
+//   //команды
+// }
+// //иначе, если
+// else if (условие) {
+//   //команды
+// }
+// //иначе
+// else {
+//   //команды
+// }
 
-switch (выражение) {
-  case значение1:
-    команды;
-    break;
-  case значение2:
-    команды;
-    break;
-  case значение3:
-    команды;
-    break;
-  default:
-    команды; //дефолт не обязательный, может остутствовать
-    break;
-}
+// switch (выражение) {
+//   case значение1:
+//     команды;
+//     break;
+//   case значение2:
+//     команды;
+//     break;
+//   case значение3:
+//     команды;
+//     break;
+//   default:
+//     команды; //дефолт не обязательный, может остутствовать
+//     break;
+// }
 
 
 
