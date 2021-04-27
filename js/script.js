@@ -23,20 +23,20 @@ do {
   let operation = prompt(menu, "0");
   
   switch(operation) {
-    case "1": let num1 = +prompt("первое число:");
-              let num2 = +prompt("второе число:");
+    case "1": num1 = +prompt("первое число:");
+              num2 = +prompt("второе число:");
 
               result = num1 + num2;
               alert(`Сумма чисел = ${result}`);
               break;
-    case "2": let num1 = prompt("первое число:");
-              let num2 = prompt("второе число:");
+    case "2": num1 = prompt("первое число:");
+              num2 = prompt("второе число:");
 
               result = num1 - num2;
               alert(`Разность чисел = ${result}`);
               break;
-    case "3": let num1 = prompt("первое число:");
-              let num2 = prompt("второе число:");
+    case "3": num1 = prompt("первое число:");
+              num2 = prompt("второе число:");
 
               result = num1 * num2;
               alert(`произведение чисел = ${result}`);
