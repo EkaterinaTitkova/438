@@ -1,3 +1,13 @@
+// convert to boolean
+// !!null > false
+// !!0 > false
+// !!"" > false
+// !!undefined > false
+
+// !!2 > true
+// !!"d" > true
+
+
 //**** Мини-калькулятор ****
 // сложение 2-х чисел
 // разность 2-х чисел
