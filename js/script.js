@@ -26,72 +26,114 @@ let menu = ` Ваш выбор (0-6)
 6. Вычисление корня n-ой степени
 0. Отмена`;
 
-let num1, num2;
 let result; //сумма, разность, произведение...
+let params = [];
 
 do {
   let operation = prompt(menu, "0");
   
   switch(operation) {
-    case "1": num1 = +prompt("первое число:");
-              num2 = +prompt("второе число:");
-
-              result = num1 + num2;
-              alert(`Сумма чисел = ${result}`);
+    case "1": params = getParametrs(operation);
+              result = getResult(params, "+");              
               break;
-    case "2": num1 = prompt("первое число:");
-              num2 = prompt("второе число:");
 
-              result = num1 - num2;
-              alert(`Разность чисел = ${result}`);
+    case "2": params = getParametrs(operation);
+              result = getResult(params, "-");              
               break;
-    case "3": num1 = prompt("первое число:");
-              num2 = prompt("второе число:");
 
-              result = num1 * num2;
-              alert(`произведение чисел = ${result}`);
+    case "3": params = getParametrs(operation);
+              result = getResult(params, "*");
               break;
-    case "4": num1 = prompt("первое число:");
-              num2 = prompt("второе число:");
 
-              if(num2 != 0) {
-                result = num1 / num2;
-                alert(`частное 2-х чисел = ${result.toFixed(4)}`);
-              }
-              else {
-                alert(`Делить на 0 нельзя!`);
-              }
+    case "4": params = getParametrs(operation);  
+              result = getResult(params, "/");
+              
+              alert(result);
               break;
-    case "5": num1 = prompt("Число:");
-              num2 = prompt("Степень:");
 
-              if(num2 < 0) {
-                result = Math.pow(num1, num2).toFixed(2);
-              }
-              else {             
-              // result = num1**num2;
-              result = Math.pow(num1, num2);
-              }
-
-              alert(`Число ${num1} в степени ${num2} = ${result}`);
-            
+    case "5": params = getParametrs(operation);
+              result = getResult(params, "^");              
               break;
-    case "6": num1 = prompt("Число:");
-              num2 = prompt("Степень корня:");
 
-              result = Math.pow(num1, 1 / num2);
-              alert(`корень степени ${num2} из числа ${num1} = ${result}`);
-
+    case "6": params = getParametrs(operation);
+              result = getResult(params, "n");
               break;
   
-    //отмена действия 
+    //отмена действия (закрытие меню)
     case "0":
     case null: cancel = false;
                 break;
-    default: alert("Ошибка! Неверный выбор!!!");
+    default: result = "Ошибка! Неверный выбор!!!";
                 break;
   }
+  if(result) {
+    alert(result);
+  }
 } while(cancel);
+
+// классический способ объявления функции - Function Declaration
+function getParametrs(oper) {
+  let param1, param2;
+  let str1, str2;
+
+  if(oper >= 1 && oper <= 4) {
+    str1 = "первое число:";
+    str2 = "второе число:";
+  }
+  else if(oper == 5) {
+    str1 = "Число:";
+    str2 = "Степень";
+  }
+  else {
+    str1 = "Число:";
+    str2 = "Степень корня";
+  }
+  
+   param1 = +prompt(str1);
+   param2 = +prompt(str2);
+
+   return [param1, param2];
+
+}
+
+function getResult(params, oper) {
+  let result;
+
+  switch(oper) {
+    case "+": result = `Сумма чисел = ${params[0] + params[1]}`;
+              break;
+
+    case "-": result = `Разность чисел = ${params[0] - params[1]}`;
+              break;
+
+    case "*": result = `произведение чисел = ${params[0] * params[1]}`;
+              break;
+
+    case "/": if(param[1] != 0) {
+              result = `частное 2-х чисел = ${(params[0] / params[1]).toFixed(2)}`;
+            }
+            else {
+              result = `Делить на 0 нельзя!`;
+            }
+            break;
+
+    case "^": if(params[1] < 0) {
+              result = `Число ${params[0]} в степени ${params[1]} = ${Math.pow(params[0], params[1]).toFixed(4)}`;
+            }
+            else { 
+              result = `Число ${params[0]} в степени ${params[1]} = ${Math.pow(params[0], params[1])}`;
+            }
+            break;
+
+    case "n": result = `корень степени ${params[1]} из числа ${params[0]} = ${Math.pow(params[0], 1 / params[1])}`;
+        
+    alert(`корень степени ${params[1]} из числа ${params[0]} = ${result}`);
+              break; 
+  }
+
+  return result;
+
+}
 
 
 // **** Задача 5 ****
