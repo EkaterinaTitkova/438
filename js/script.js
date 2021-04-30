@@ -31,104 +31,148 @@ let params = [];
 
 do {
   let operation = prompt(menu, "0");
-  
-  switch(operation) {
-    case "1": params = getParametrs(operation);
-              result = getResult(params, "+");              
-              break;
 
-    case "2": params = getParametrs(operation);
-              result = getResult(params, "-");              
-              break;
+  switch (operation) {
+    case "1":
+      params = getParametrs(operation);
+      result = getResult(params, "+");
+      break;
 
-    case "3": params = getParametrs(operation);
-              result = getResult(params, "*");
-              break;
+    case "2":
+      params = getParametrs(operation);
+      result = getResult(params, "-");
+      break;
 
-    case "4": params = getParametrs(operation);  
-              result = getResult(params, "/");
-              
-              alert(result);
-              break;
+    case "3":
+      params = getParametrs(operation);
+      result = getResult(params, "*");
+      break;
 
-    case "5": params = getParametrs(operation);
-              result = getResult(params, "^");              
-              break;
+    case "4":
+      params = getParametrs(operation);
+      result = getResult(params, "/");
+      break;
 
-    case "6": params = getParametrs(operation);
-              result = getResult(params, "n");
-              break;
-  
-    //отмена действия (закрытие меню)
+    case "5":
+      params = getParametrs(operation);
+      result = getResult(params, "^");
+      break;
+
+    case "6":
+      params = getParametrs(operation);
+      result = getResult(params, "n");
+      break;
+
+      //отмена действия (закрытие меню)
     case "0":
-    case null: cancel = false;
-                break;
-    default: result = "Ошибка! Неверный выбор!!!";
-                break;
+    case null:
+      cancel = false;
+      break;
+    default:
+      result = "Ошибка! Неверный выбор!!!";
+      break;
   }
-  if(result) {
+  if (result) {
     alert(result);
   }
-} while(cancel);
+} while (cancel);
 
 // классический способ объявления функции - Function Declaration
 function getParametrs(oper) {
-  let param1, param2;
   let str1, str2;
 
-  if(oper >= 1 && oper <= 4) {
+  if (oper >= 1 && oper <= 4) {
     str1 = "первое число:";
     str2 = "второе число:";
-  }
-  else if(oper == 5) {
+  } else if (oper == 5) {
     str1 = "Число:";
     str2 = "Степень";
-  }
-  else {
+  } else {
     str1 = "Число:";
     str2 = "Степень корня";
   }
-  
-   param1 = +prompt(str1);
-   param2 = +prompt(str2);
-
-   return [param1, param2];
-
+  return checkParametrs(str1, str2);
 }
+
+function checkParametrs(str1, str2) {
+  let p1, p2;
+  let cancel;
+
+  do {
+    cancel = false;
+    p1 = +prompt(str1);
+
+    if(p1 == 0) {
+      p1 == undefined;
+      break;
+    }
+    if (isNaN(p1)) {
+      alert("Вы ввели не число!");
+      cancel = true;
+    } 
+    else {
+      do {
+        cancel = false;
+        p2 = +prompt(str2);
+
+        if(p2 == 0) {
+          p2 == undefined;
+          break;
+        }
+        if(isNaN(p2)) {
+          alert("Вы ввели не число!");
+          cancel = true;
+        }
+      } while(cancel);
+    }
+  } while(cancel);
+
+  return [p1, p2];
+}
+
 
 function getResult(params, oper) {
   let result;
+  let p1 = params[0],
+    p2 = params[1];
 
-  switch(oper) {
-    case "+": result = `Сумма чисел = ${params[0] + params[1]}`;
-              break;
+  if ((typeof p1).toString() == "undefined" || (typeof p2).toString() == "undefined") {
+    result ="Вы отменили ввод!";
+  } 
+  else {
+    switch (oper) {
+      case "+":
+        result = `Сумма чисел = ${p1 + p2}`;
+        break;
 
-    case "-": result = `Разность чисел = ${params[0] - params[1]}`;
-              break;
+      case "-":
+        result = `Разность чисел = ${p1 - p2}`;
+        break;
 
-    case "*": result = `произведение чисел = ${params[0] * params[1]}`;
-              break;
+      case "*":
+        result = `произведение чисел = ${p1 * p2}`;
+        break;
 
-    case "/": if(param[1] != 0) {
-              result = `частное 2-х чисел = ${(params[0] / params[1]).toFixed(2)}`;
-            }
-            else {
-              result = `Делить на 0 нельзя!`;
-            }
-            break;
+      case "/":
+        if (p2 != 0) {
+          result = `частное 2-х чисел = ${(p1 / p2).toFixed(4)}`;
+        } else {
+          result = `Делить на 0 нельзя!`;
+        }
+        break;
 
-    case "^": if(params[1] < 0) {
-              result = `Число ${params[0]} в степени ${params[1]} = ${Math.pow(params[0], params[1]).toFixed(4)}`;
-            }
-            else { 
-              result = `Число ${params[0]} в степени ${params[1]} = ${Math.pow(params[0], params[1])}`;
-            }
-            break;
+      case "^":
+        if (p2 < 0) {
+          result = `Число ${p1} в степени ${p2} = ${(p1**p2).toFixed(4)}`;
+        } else {
+          result = `Число ${p1} в степени ${p2} = ${(p1**p2)}`;
+        }
+        break;
 
-    case "n": result = `корень степени ${params[1]} из числа ${params[0]} = ${Math.pow(params[0], 1 / params[1])}`;
-        
-    alert(`корень степени ${params[1]} из числа ${params[0]} = ${result}`);
-              break; 
+      case "n":
+        result = `корень степени ${p2} из числа ${p1} = ${p1**(1 / p2)}`;
+        break;
+    }
   }
 
   return result;
